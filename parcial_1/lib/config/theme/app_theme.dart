@@ -1,26 +1,40 @@
 import 'package:flutter/material.dart';
 
-List<Color> _colorsTheme = [
-  Colors.red,
-  Colors.green,
-  Colors.blue,
-  Colors.orange,
-  Colors.purple,
-  Colors.yellow,
-  Colors.cyan,
-  Colors.pink,
-];
-
 class AppTheme {
-  int selectColor;
-  AppTheme({required this.selectColor});
-
   ThemeData getThemeData() {
+    const primary = Color(0xFF2563EB);
+    const secondary = Color(0xFF60A5FA);
+    const background = Color(0xFFF9FAFB);
+    const textPrimary = Color(0xFF111827);
+    const textSecondary = Color(0xFF6B7280);
+    const accent = Color(0xF59E0B00);
+
     return ThemeData(
       useMaterial3: true,
-      colorSchemeSeed: _colorsTheme[selectColor],
-      appBarTheme: AppBarTheme(backgroundColor: _colorsTheme[selectColor]),
-      brightness: Brightness.light,
+      colorScheme: ColorScheme.light(
+        primary: primary,
+        secondary: secondary,
+        surface: background,
+        onSurface: textPrimary,
+        onSecondary: textSecondary,
+        tertiary: accent,
+      ),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: primary,
+        foregroundColor: Colors.white,
+        elevation: 0,
+      ),
+      scaffoldBackgroundColor: background,
+      textTheme: const TextTheme(
+        bodyLarge: TextStyle(color: textPrimary),
+        bodyMedium: TextStyle(color: textSecondary),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: accent,
+          foregroundColor: Colors.white,
+        ),
+      ),
     );
   }
 }
