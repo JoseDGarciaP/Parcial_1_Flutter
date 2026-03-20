@@ -17,9 +17,7 @@ class ProductDetailScreen extends StatelessWidget {
             body: Center(child: CircularProgressIndicator()),
           );
         } else if (snapshot.hasError || snapshot.data == null) {
-          return const Scaffold(
-            body: Center(child: Text("No disponible")),
-          );
+          return const Scaffold(body: Center(child: Text("No disponible")));
         }
 
         final p = snapshot.data!;
@@ -57,10 +55,6 @@ class _DetailViewState extends State<_DetailView> {
     final images = widget.images;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(p.title, overflow: TextOverflow.ellipsis),
-        elevation: 0,
-      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +72,11 @@ class _DetailViewState extends State<_DetailView> {
                       images[i],
                       fit: BoxFit.contain,
                       errorBuilder: (_, __, ___) => const Center(
-                        child: Icon(Icons.broken_image, size: 72, color: Colors.grey),
+                        child: Icon(
+                          Icons.broken_image,
+                          size: 72,
+                          color: Colors.grey,
+                        ),
                       ),
                     ),
                   ),
@@ -117,7 +115,9 @@ class _DetailViewState extends State<_DetailView> {
                   Chip(
                     label: Text(p.category),
                     visualDensity: VisualDensity.compact,
-                    backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                    backgroundColor: Theme.of(
+                      context,
+                    ).colorScheme.primaryContainer,
                     labelStyle: TextStyle(
                       color: Theme.of(context).colorScheme.onPrimaryContainer,
                       fontSize: 12,
@@ -126,7 +126,10 @@ class _DetailViewState extends State<_DetailView> {
                   const SizedBox(height: 8),
                   Text(
                     p.title,
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 12),
                   Row(
@@ -141,7 +144,11 @@ class _DetailViewState extends State<_DetailView> {
                         ),
                       ),
                       const Spacer(),
-                      const Icon(Icons.star_rounded, color: Colors.amber, size: 22),
+                      const Icon(
+                        Icons.star_rounded,
+                        color: Colors.amber,
+                        size: 22,
+                      ),
                       const SizedBox(width: 4),
                       Text(
                         '${p.rating.toStringAsFixed(1)} / 5',
@@ -153,13 +160,17 @@ class _DetailViewState extends State<_DetailView> {
                   Row(
                     children: [
                       Icon(
-                        p.stock > 0 ? Icons.check_circle_outline : Icons.cancel_outlined,
+                        p.stock > 0
+                            ? Icons.check_circle_outline
+                            : Icons.cancel_outlined,
                         size: 18,
                         color: p.stock > 0 ? Colors.green : Colors.red,
                       ),
                       const SizedBox(width: 6),
                       Text(
-                        p.stock > 0 ? '${p.stock} unidades disponibles' : 'Sin stock',
+                        p.stock > 0
+                            ? '${p.stock} unidades disponibles'
+                            : 'Sin stock',
                         style: TextStyle(
                           color: p.stock > 0 ? Colors.green : Colors.red,
                           fontWeight: FontWeight.w500,
@@ -175,7 +186,11 @@ class _DetailViewState extends State<_DetailView> {
                   const SizedBox(height: 8),
                   Text(
                     p.description,
-                    style: const TextStyle(fontSize: 14, height: 1.6, color: Colors.black87),
+                    style: const TextStyle(
+                      fontSize: 14,
+                      height: 1.6,
+                      color: Colors.black87,
+                    ),
                   ),
                   const SizedBox(height: 80),
                 ],
@@ -184,7 +199,19 @@ class _DetailViewState extends State<_DetailView> {
           ],
         ),
       ),
-  
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
+          child: FilledButton.icon(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: const Icon(Icons.arrow_back_ios_new_rounded),
+            label: Text('Regresar'),
+            style: FilledButton.styleFrom(
+              minimumSize: const Size.fromHeight(48),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
