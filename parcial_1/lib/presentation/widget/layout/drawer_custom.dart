@@ -51,7 +51,7 @@ class DrawerCustom extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Ingenieria de sistemas',
+                      'Ingeniería de sistemas',
                       style: TextStyle(
                         color: Colors.white70,
                         fontSize: 13,

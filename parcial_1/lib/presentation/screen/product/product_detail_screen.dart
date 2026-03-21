@@ -171,8 +171,8 @@ class _DetailViewState extends State<_DetailView> {
                       const SizedBox(width: 6),
                       Text(
                         p.stock > 0
-                            ? '${p.stock} unidades disponibles'
-                            : 'Sin stock',
+                            ? '${p.stock} units available'
+                            : 'Out of stock',
                         style: TextStyle(
                           color: p.stock > 0 ? colors.primary : colors.error,
                           fontWeight: FontWeight.w500,
