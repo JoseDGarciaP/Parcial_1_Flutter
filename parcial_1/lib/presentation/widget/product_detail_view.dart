@@ -1,45 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:parcial_1/model/product_model.dart';
-import 'package:parcial_1/service/product_service.dart';
 
-class ProductDetailScreen extends StatelessWidget {
-  final int id;
-
-  const ProductDetailScreen({super.key, required this.id});
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<ProductModel?>(
-      future: ProductService().getProductById(id),
-      builder: (_, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Scaffold(
-            body: Center(child: CircularProgressIndicator()),
-          );
-        } else if (snapshot.hasError || snapshot.data == null) {
-          return const Scaffold(body: Center(child: Text("No disponible")));
-        }
-
-        final p = snapshot.data!;
-        final images = p.images.isNotEmpty ? p.images : [p.thumbnail];
-
-        return _DetailView(p: p, images: images);
-      },
-    );
-  }
-}
-
-class _DetailView extends StatefulWidget {
+class ProductDetailView extends StatefulWidget {
   final ProductModel p;
   final List<String> images;
 
-  const _DetailView({required this.p, required this.images});
+  const ProductDetailView({super.key, required this.p, required this.images});
 
   @override
-  State<_DetailView> createState() => _DetailViewState();
+  State<ProductDetailView> createState() => _ProductDetailViewState();
 }
 
-class _DetailViewState extends State<_DetailView> {
+class _ProductDetailViewState extends State<ProductDetailView> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
@@ -60,7 +32,6 @@ class _DetailViewState extends State<_DetailView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Carrusel de imágenes
             SizedBox(
               height: 280,
               child: Stack(
@@ -107,7 +78,6 @@ class _DetailViewState extends State<_DetailView> {
                 ],
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -183,9 +153,7 @@ class _DetailViewState extends State<_DetailView> {
                   Divider(
                     height: 28,
                     thickness: 1,
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.primary.withValues(alpha: 0.2),
+                    color: colors.primary.withValues(alpha: 0.2),
                   ),
                   Text(
                     'Descripción',

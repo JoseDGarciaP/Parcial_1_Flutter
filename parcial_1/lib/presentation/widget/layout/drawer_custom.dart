@@ -11,19 +11,30 @@ class DrawerCustom extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          DrawerHeader(
+          Container(
+            height: 160, 
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondary,
+              image: DecorationImage(
+                image: const NetworkImage(
+                  'https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?w=400&fit=crop',
+                ),
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                  const Color(0xFF2563EB).withValues(alpha: 0.80), 
+                  BlendMode.srcOver,
+                ),
+              ),
             ),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               children: [
                 CircleAvatar(
                   radius: 30,
-                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  backgroundColor: Colors.white24,
                   child: Icon(
-                    Icons.person, 
-                    size: 36, 
-                    color: Theme.of(context).colorScheme.surface
+                    Icons.person,
+                    size: 36,
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -41,7 +52,10 @@ class DrawerCustom extends StatelessWidget {
                     ),
                     Text(
                       'Ingenieria de sistemas',
-                      style: TextStyle(color: Theme.of(context).colorScheme.onSecondary, fontSize: 13),
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 13,
+                      ),
                     ),
                   ],
                 ),
