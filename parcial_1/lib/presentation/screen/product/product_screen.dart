@@ -30,11 +30,13 @@ class ProductScreen extends StatelessWidget {
                     width: 56,
                     height: 56,
                     fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) => const Icon(
-                      Icons.broken_image,
-                      size: 56,
-                      color: Colors.grey,
-                    ),
+                    errorBuilder: (context, error, stackTrace) {
+                      return const Icon(
+                        Icons.broken_image,
+                        size: 56,
+                        color: Colors.grey,
+                      );
+                    },
                   ),
                 ),
                 title: Text(product.title),
